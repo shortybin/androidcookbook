@@ -1,13 +1,13 @@
 package com.wuhuabin.cookbook.ui
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.TextView
 import androidx.activity.viewModels
+import com.wuhuabin.common.base.BaseActivity
 import com.wuhuabin.cookbook.R
 import com.wuhuabin.cookbook.viewmodel.UserViewModel
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : BaseActivity() {
     val userViewModel: UserViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
