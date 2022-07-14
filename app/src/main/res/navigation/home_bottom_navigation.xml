@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/home_bottom_navigation"
+    app:startDestination="@id/homeFragment">
+
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.wuhuabin.cookbook.ui.HomeFragment"
+        android:label="HomeFragment" />
+    <fragment
+        android:id="@+id/categoryFragment"
+        android:name="com.wuhuabin.cookbook.ui.CategoryFragment"
+        android:label="CategoryFragment" />
+    <fragment
+        android:id="@+id/mineFragment"
+        android:name="com.wuhuabin.cookbook.ui.MineFragment"
+        android:label="MineFragment" />
+</navigation>

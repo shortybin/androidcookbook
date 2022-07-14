@@ -1,10 +1,12 @@
 package com.wuhuabin.cookbook.ui
 
 import android.os.Bundle
-import android.widget.TextView
 import androidx.activity.viewModels
+import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.ui.setupWithNavController
 import com.wuhuabin.common.base.BaseActivity
 import com.wuhuabin.cookbook.R
+import com.wuhuabin.cookbook.databinding.ActivityMainBinding
 import com.wuhuabin.cookbook.viewmodel.UserViewModel
 
 class MainActivity : BaseActivity() {
@@ -12,10 +14,13 @@ class MainActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        val inflate = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(inflate.root)
 
-        findViewById<TextView>(R.id.text_view).setOnClickListener {
-            userViewModel.login()
-        }
+        val navHostFragment =
+            supportFragmentManager.findFragmentById(R.id.fragment_container_view) as NavHostFragment
+
+        val navController = navHostFragment.navController
+        inflate.bottomNavigationView.setupWithNavController(navController)
     }
 }
