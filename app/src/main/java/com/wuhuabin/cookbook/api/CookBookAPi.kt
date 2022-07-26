@@ -15,7 +15,7 @@ import retrofit2.http.POST
 interface CookBookAPi {
     companion object {
         fun create(): CookBookAPi {
-            return HttpClient.getInstance().retrofit.create(CookBookAPi::class.java)
+            return HttpClient.instance.retrofit.create(CookBookAPi::class.java)
         }
     }
 

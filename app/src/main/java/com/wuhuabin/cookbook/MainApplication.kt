@@ -12,7 +12,7 @@ import com.wuhuabin.net.HttpClient
 class MainApplication : Application() {
     override fun onCreate() {
         super.onCreate()
-        HttpClient.getInstance()
+        HttpClient.instance
             .addInterceptor(BusinessErrorInterceptor())
             .addInterceptor(BaseRequestInterceptor())
             .build("http://10.0.2.2:8080")
