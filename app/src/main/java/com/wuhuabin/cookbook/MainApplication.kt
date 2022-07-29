@@ -10,8 +10,17 @@ import com.wuhuabin.net.HttpClient
  * on 2022/7/2
  */
 class MainApplication : Application() {
+
+    companion object {
+        private lateinit var application: MainApplication
+        fun getInstance(): Application {
+            return application
+        }
+    }
+
     override fun onCreate() {
         super.onCreate()
+        application = this
         HttpClient.instance
             .addInterceptor(BusinessErrorInterceptor())
             .addInterceptor(BaseRequestInterceptor())

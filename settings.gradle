@@ -10,7 +10,12 @@ dependencyResolutionManagement {
     repositories {
         google()
         mavenCentral()
+        jcenter()
         maven { url 'https://www.jitpack.io' }
+        maven {
+            allowInsecureProtocol = true
+            url "http://lib.gcssloop.com:8081/repository/gcssloop-central/"
+        }
     }
 }
 rootProject.name = "cookbook"

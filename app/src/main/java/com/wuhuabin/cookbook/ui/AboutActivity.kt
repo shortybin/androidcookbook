@@ -13,5 +13,8 @@ class AboutActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
         binding.titleView.setTitleText("关于我们")
+        binding.titleView.setLeftOnClickListener {
+            finish()
+        }
     }
 }

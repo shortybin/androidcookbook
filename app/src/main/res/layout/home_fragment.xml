@@ -41,11 +41,11 @@
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <EditText
+            <TextView
                 android:id="@+id/menu_edit_text"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@null"
+                android:gravity="center|left"
                 android:hint="搜索菜谱"
                 android:paddingLeft="35dp"
                 android:textColorHint="@color/grey"

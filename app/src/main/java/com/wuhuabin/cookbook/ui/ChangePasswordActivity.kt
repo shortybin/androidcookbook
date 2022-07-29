@@ -12,5 +12,8 @@ class ChangePasswordActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
         binding.titleView.setTitleText("修改密码")
+        binding.titleView.setLeftOnClickListener{
+            finish()
+        }
     }
 }

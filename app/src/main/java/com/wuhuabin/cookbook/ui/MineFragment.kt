@@ -10,6 +10,8 @@ import com.dylanc.viewbinding.binding
 import com.wuhuabin.cookbook.R
 import com.wuhuabin.cookbook.databinding.CategoryFragmentBinding
 import com.wuhuabin.cookbook.databinding.MineFragmentBinding
+import com.wuhuabin.cookbook.utils.ToastUtils
+import com.wuhuabin.cookbook.utils.UserInfoUtils
 
 class MineFragment : Fragment(R.layout.mine_fragment) {
 
@@ -23,8 +25,51 @@ class MineFragment : Fragment(R.layout.mine_fragment) {
         binding.connectItem.setItemText("联系我们")
         binding.aboutItem.setItemText("关于我们")
 
+        if (UserInfoUtils.isLogin()) {
+            binding.logoutText.visibility = View.VISIBLE
+            binding.logoutText.setOnClickListener {
+
+            }
+        } else {
+            binding.logoutText.visibility = View.GONE
+        }
+
         binding.mineName.setOnClickListener {
-            startActivity(Intent(context, LoginActivity::class.java))
+            if (!UserInfoUtils.isLogin()) {
+                startActivity(Intent(context, LoginActivity::class.java))
+            }
+        }
+
+        binding.infoItem.setOnClickListener {
+            if (UserInfoUtils.isLogin()) {
+                startActivity(Intent(context, PersonalInfoActivity::class.java))
+            } else {
+                ToastUtils.showCenter("请先登录")
+            }
+        }
+
+        binding.releaseItem.setOnClickListener {
+            if (UserInfoUtils.isLogin()) {
+                startActivity(Intent(context, MyReleaseActivity::class.java))
+            } else {
+                ToastUtils.showCenter("请先登录")
+            }
+        }
+
+        binding.changePasswordItem.setOnClickListener {
+            if (UserInfoUtils.isLogin()) {
+                startActivity(Intent(context, ChangePasswordActivity::class.java))
+            } else {
+                ToastUtils.showCenter("请先登录")
+            }
+        }
+
+        binding.connectItem.setOnClickListener {
+            startActivity(Intent(context, ConnectActivity::class.java))
+        }
+
+        binding.aboutItem.setOnClickListener {
+            startActivity(Intent(context, AboutActivity::class.java))
         }
     }
 }

@@ -13,5 +13,8 @@ class ConnectActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
         binding.titleView.setTitleText("联系我们")
+        binding.titleView.setLeftOnClickListener {
+            finish()
+        }
     }
 }
