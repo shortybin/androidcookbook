@@ -24,6 +24,6 @@ class MainApplication : Application() {
         HttpClient.instance
             .addInterceptor(BusinessErrorInterceptor())
             .addInterceptor(BaseRequestInterceptor())
-            .build("http://10.0.2.2:8080")
+            .build("http://192.168.0.101:8080")
     }
 }

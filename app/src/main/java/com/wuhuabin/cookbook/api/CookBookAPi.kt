@@ -1,12 +1,12 @@
 package com.wuhuabin.cookbook.api
 
+import com.wuhuabin.cookbook.bean.UploadImageBean
 import com.wuhuabin.cookbook.bean.UserBean
 import com.wuhuabin.net.ApiResponse
 import com.wuhuabin.net.ApiResult
 import com.wuhuabin.net.HttpClient
-import retrofit2.http.Field
-import retrofit2.http.FormUrlEncoded
-import retrofit2.http.POST
+import okhttp3.MultipartBody
+import retrofit2.http.*
 
 /**
  * Created by shortybin
@@ -28,4 +28,7 @@ interface CookBookAPi {
         @Field("userName") userName: String,
         @Field("password") password: String
     ): ApiResult<ApiResponse<UserBean>>
+
+    @POST("/upload/file")
+    suspend fun uploadImage(@Body multipartBody: MultipartBody): ApiResult<ApiResponse<String>>
 }
