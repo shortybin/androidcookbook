@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
 import com.dylanc.viewbinding.binding
 import com.wuhuabin.common.GridSpacingItemDecoration
@@ -14,10 +15,12 @@ import com.wuhuabin.cookbook.R
 import com.wuhuabin.cookbook.adapter.CategoryAdapter
 import com.wuhuabin.cookbook.databinding.CategoryFragmentBinding
 import com.wuhuabin.cookbook.databinding.HomeFragmentBinding
+import com.wuhuabin.cookbook.viewmodel.CategoryViewModel
 
 class CategoryFragment : Fragment(R.layout.category_fragment) {
 
     private val binding: CategoryFragmentBinding by binding()
+    private val categoryViewModel: CategoryViewModel by viewModels()
     private val categoryAdapter = CategoryAdapter()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

@@ -2,12 +2,15 @@ package com.wuhuabin.cookbook.ui
 
 import android.os.Bundle
 import android.view.View
+import androidx.activity.viewModels
 import com.dylanc.viewbinding.binding
 import com.wuhuabin.common.base.BaseActivity
 import com.wuhuabin.cookbook.databinding.ActivityPersonalInfoBinding
+import com.wuhuabin.cookbook.viewmodel.PersonalInfoViewModel
 
 class PersonalInfoActivity : BaseActivity() {
     private val binding: ActivityPersonalInfoBinding by binding()
+    private val personalInfoViewModel: PersonalInfoViewModel by viewModels()
 
     //1 正常状态 2 修改状态
     private var status = 1

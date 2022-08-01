@@ -29,6 +29,17 @@ interface CookBookAPi {
         @Field("password") password: String
     ): ApiResult<ApiResponse<UserBean>>
 
+    /**
+     * 注册
+     */
+    @FormUrlEncoded
+    @POST("/register")
+    suspend fun userRegister(
+        @Field("userName") userName: String,
+        @Field("password") password: String
+    ): ApiResult<ApiResponse<UserBean>>
+
+
     @POST("/upload/file")
     suspend fun uploadImage(@Body multipartBody: MultipartBody): ApiResult<ApiResponse<String>>
 }

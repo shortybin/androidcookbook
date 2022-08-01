@@ -1,6 +1,7 @@
 package com.wuhuabin.cookbook.ui
 
 import android.os.Bundle
+import androidx.activity.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
 import com.dylanc.viewbinding.binding
 import com.wuhuabin.common.GridSpacingItemDecoration
@@ -8,9 +9,11 @@ import com.wuhuabin.common.base.BaseActivity
 import com.wuhuabin.common.dp2px
 import com.wuhuabin.cookbook.adapter.HomeListAdapter
 import com.wuhuabin.cookbook.databinding.ActivityMyReleaseBinding
+import com.wuhuabin.cookbook.viewmodel.MyReleaseViewModel
 
 class MyReleaseActivity : BaseActivity() {
     private val binding: ActivityMyReleaseBinding by binding()
+    private val myReleaseViewModel: MyReleaseViewModel by viewModels()
     private val homeListAdapter = HomeListAdapter()
 
     override fun onCreate(savedInstanceState: Bundle?) {

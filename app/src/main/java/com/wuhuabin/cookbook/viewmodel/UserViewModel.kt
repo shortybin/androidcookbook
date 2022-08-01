@@ -16,16 +16,5 @@ import kotlinx.coroutines.launch
  */
 class UserViewModel : BaseViewModel() {
 
-    fun login() {
-        viewModelScope.launch {
-            when (val result = CookBookAPi.create().userLogin("测试", "123456")) {
-                is ApiResult.Success<ApiResponse<UserBean>> -> {
-                    Log.d("test", result.bean.data.toString())
-                }
-                is ApiResult.Failure -> {
 
-                }
-            }
-        }
-    }
 }
