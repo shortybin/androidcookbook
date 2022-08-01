@@ -25,7 +25,7 @@ class UserInfoUtils {
         }
 
         fun isLogin(): Boolean {
-            return true
+            return false
         }
     }
 }
