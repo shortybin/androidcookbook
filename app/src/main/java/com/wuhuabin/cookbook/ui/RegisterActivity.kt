@@ -43,5 +43,14 @@ class RegisterActivity : BaseActivity() {
                 loadingDialog.dismiss()
             }
         }
+
+        registerViewModel.toastMessage.observe(this) {
+            ToastUtils.showCenter(it)
+        }
+
+        registerViewModel.registerSuccess.observe(this) {
+            ToastUtils.showCenter(it)
+            finish()
+        }
     }
 }

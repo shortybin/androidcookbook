@@ -1,13 +1,12 @@
 package com.wuhuabin.cookbook.ui
 
 import android.content.Intent
-import android.graphics.Color
 import android.os.Bundle
 import androidx.activity.viewModels
 import com.dylanc.viewbinding.binding
 import com.wuhuabin.common.base.BaseActivity
-import com.wuhuabin.cookbook.R
 import com.wuhuabin.cookbook.databinding.ActivityLoginBinding
+import com.wuhuabin.cookbook.utils.ToastUtils
 import com.wuhuabin.cookbook.viewmodel.LoginViewModel
 
 class LoginActivity : BaseActivity() {
@@ -25,6 +24,38 @@ class LoginActivity : BaseActivity() {
         }
         binding.titleView.setRightOnClickListener {
             startActivity(Intent(this, RegisterActivity::class.java))
+        }
+
+        binding.loginText.setOnClickListener {
+            if (binding.userNameEdit.text.toString().isNotEmpty()) {
+                if (binding.passwordEdit.text.toString().isNotEmpty()) {
+                    loginViewModel.login(
+                        binding.userNameEdit.text.toString(),
+                        binding.passwordEdit.text.toString()
+                    )
+                } else {
+                    ToastUtils.showCenter("请输入密码")
+                }
+            } else {
+                ToastUtils.showCenter("请输入用户名")
+            }
+        }
+
+        loginViewModel.loadingState.observe(this) {
+            if (it.isLoading) {
+                loadingDialog.setText(it.loadingText)
+                loadingDialog.show()
+            } else {
+                loadingDialog.dismiss()
+            }
+        }
+
+        loginViewModel.toastMessage.observe(this) {
+            ToastUtils.showCenter(it)
+        }
+
+        loginViewModel.loginSuccess.observe(this) {
+            finish()
         }
     }
 }

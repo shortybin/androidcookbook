@@ -6,9 +6,12 @@ import android.os.ParcelFileDescriptor
 import androidx.activity.viewModels
 import com.dylanc.viewbinding.binding
 import com.luck.picture.lib.basic.PictureSelector
+import com.luck.picture.lib.config.PictureConfig
 import com.luck.picture.lib.config.SelectMimeType
+import com.luck.picture.lib.config.SelectModeConfig
 import com.luck.picture.lib.entity.LocalMedia
 import com.luck.picture.lib.interfaces.OnResultCallbackListener
+import com.luck.picture.lib.language.LanguageConfig
 import com.wuhuabin.common.base.BaseActivity
 import com.wuhuabin.cookbook.databinding.ActivityAddCookbookBinding
 import com.wuhuabin.cookbook.utils.GlideEngine
@@ -21,7 +24,7 @@ import java.io.FileInputStream
 class AddCookbookActivity : BaseActivity() {
     private val binding: ActivityAddCookbookBinding by binding()
     private val addCookbookViewModel: AddCookbookViewModel by viewModels()
-    lateinit var image: ArrayList<LocalMedia>
+    private val image = mutableListOf<LocalMedia>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -44,9 +47,13 @@ class AddCookbookActivity : BaseActivity() {
         binding.cookbookImage.setOnClickListener {
             PictureSelector.create(this).openGallery(SelectMimeType.ofImage())
                 .setImageEngine(GlideEngine.createGlideEngine())
+                .setSelectionMode(SelectModeConfig.SINGLE)
+                .isDisplayCamera(false)
+                .setLanguage(LanguageConfig.CHINESE)
                 .forResult(object : OnResultCallbackListener<LocalMedia> {
                     override fun onResult(result: ArrayList<LocalMedia>) {
-                        image = result
+                        image.clear()
+                        image.addAll(result)
                     }
 
                     override fun onCancel() {

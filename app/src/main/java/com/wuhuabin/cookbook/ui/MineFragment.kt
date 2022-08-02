@@ -25,15 +25,6 @@ class MineFragment : Fragment(R.layout.mine_fragment) {
         binding.connectItem.setItemText("联系我们")
         binding.aboutItem.setItemText("关于我们")
 
-        if (UserInfoUtils.isLogin()) {
-            binding.logoutText.visibility = View.VISIBLE
-            binding.logoutText.setOnClickListener {
-
-            }
-        } else {
-            binding.logoutText.visibility = View.GONE
-        }
-
         binding.mineName.setOnClickListener {
             if (!UserInfoUtils.isLogin()) {
                 startActivity(Intent(context, LoginActivity::class.java))
@@ -70,6 +61,21 @@ class MineFragment : Fragment(R.layout.mine_fragment) {
 
         binding.aboutItem.setOnClickListener {
             startActivity(Intent(context, AboutActivity::class.java))
+        }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        if (UserInfoUtils.isLogin()) {
+            binding.mineName.text = UserInfoUtils.getUser()?.username
+            binding.logoutText.visibility = View.VISIBLE
+            binding.logoutText.setOnClickListener {
+                UserInfoUtils.logout()
+                startActivity(Intent(context, LoginActivity::class.java))
+            }
+        } else {
+            binding.mineName.text = "登录/注册"
+            binding.logoutText.visibility = View.GONE
         }
     }
 }

@@ -1,5 +1,6 @@
 package com.wuhuabin.cookbook.api
 
+import com.wuhuabin.cookbook.bean.CategoryBean
 import com.wuhuabin.cookbook.bean.UploadImageBean
 import com.wuhuabin.cookbook.bean.UserBean
 import com.wuhuabin.net.ApiResponse
@@ -23,7 +24,7 @@ interface CookBookAPi {
      * 登录
      */
     @FormUrlEncoded
-    @POST("/login")
+    @POST("/user/login")
     suspend fun userLogin(
         @Field("userName") userName: String,
         @Field("password") password: String
@@ -33,13 +34,32 @@ interface CookBookAPi {
      * 注册
      */
     @FormUrlEncoded
-    @POST("/register")
+    @POST("/user/register")
     suspend fun userRegister(
         @Field("userName") userName: String,
         @Field("password") password: String
-    ): ApiResult<ApiResponse<UserBean>>
+    ): ApiResult<ApiResponse<String>>
 
+    /**
+     * 修改密码
+     */
+    @FormUrlEncoded
+    @POST("/user/changePassword")
+    suspend fun changePassword(
+        @Field("userId") userId: Int,
+        @Field("password") userName: String,
+        @Field("confirmPassword") password: String
+    ): ApiResult<ApiResponse<String>>
 
-    @POST("/upload/file")
+    /**
+     * 获取菜谱分类
+     */
+    @GET("/category/getCategoryList")
+    suspend fun getCategory(): ApiResult<ApiResponse<List<CategoryBean>>>
+
+    /**
+     * 上传图片
+     */
+    @POST("/dish/uploadFile")
     suspend fun uploadImage(@Body multipartBody: MultipartBody): ApiResult<ApiResponse<String>>
 }

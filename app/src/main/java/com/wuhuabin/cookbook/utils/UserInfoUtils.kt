@@ -25,7 +25,11 @@ class UserInfoUtils {
         }
 
         fun isLogin(): Boolean {
-            return false
+            return getUser() != null
+        }
+
+        fun logout() {
+            sharedPreferencesUtils.clear()
         }
     }
 }

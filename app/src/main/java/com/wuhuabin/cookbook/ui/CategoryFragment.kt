@@ -29,15 +29,14 @@ class CategoryFragment : Fragment(R.layout.category_fragment) {
         binding.recyclerView.addItemDecoration(GridSpacingItemDecoration(3, 10f.dp2px(), false))
         binding.recyclerView.adapter = categoryAdapter
 
-        val list = mutableListOf<String>()
-        for (i in 1..100) {
-            list.add(i.toString())
-        }
-
-        categoryAdapter.data.addAll(list)
-
         binding.searchLayout.setOnClickListener {
             startActivity(Intent(context, SearchActivity::class.java))
         }
+
+        categoryViewModel.categoryList.observe(viewLifecycleOwner) {
+            categoryAdapter.data.addAll(it)
+        }
+
+        categoryViewModel.getCategory()
     }
 }

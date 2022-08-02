@@ -37,11 +37,11 @@ class BusinessErrorInterceptor : Interceptor {
 
             val errorCode = jsonObject.optInt("status")
             //对于业务成功的情况不做处理
-            if (errorCode == 10000) {
+            if (errorCode == 200) {
                 return response
             }
             //服务器返回的error
-            throw ApiException(errorCode, jsonObject.optString("mag"))
+            throw ApiException(errorCode, jsonObject.optString("msg"))
         } else {
             throw ApiException(response.code(), response.message())
         }

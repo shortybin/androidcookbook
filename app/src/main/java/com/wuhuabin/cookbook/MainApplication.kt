@@ -1,7 +1,6 @@
 package com.wuhuabin.cookbook
 
 import android.app.Application
-import com.wuhuabin.cookbook.api.BaseRequestInterceptor
 import com.wuhuabin.cookbook.api.BusinessErrorInterceptor
 import com.wuhuabin.net.HttpClient
 
@@ -23,7 +22,6 @@ class MainApplication : Application() {
         application = this
         HttpClient.instance
             .addInterceptor(BusinessErrorInterceptor())
-            .addInterceptor(BaseRequestInterceptor())
-            .build("http://192.168.0.101:8080")
+            .build("http://192.168.2.217:8080")
     }
 }
