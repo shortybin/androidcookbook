@@ -9,14 +9,14 @@ import com.wuhuabin.net.ApiResponse
 import com.wuhuabin.net.ApiResult
 import kotlinx.coroutines.launch
 
-class HomeViewModel : BaseViewModel() {
-    val homeDishList = MutableLiveData<List<DishDetailsBean>>()
+class CategoryDishListViewModel : BaseViewModel() {
+    val dishList = MutableLiveData<List<DishDetailsBean>>()
 
-    fun homeList(page: Int) {
+    fun getCategoryDishList(categoryId: Int, pageNum: Int) {
         viewModelScope.launch {
-            when (val result = CookBookAPi.create().homeDishList(page, 20)) {
+            when (val result = CookBookAPi.create().getCategoryDishList(categoryId, pageNum, 20)) {
                 is ApiResult.Success<ApiResponse<List<DishDetailsBean>>> -> {
-                    homeDishList.value = result.bean.data
+                    dishList.value = result.bean.data
                 }
                 is ApiResult.Failure -> {
                     toastMessage.value = result.errorMsg

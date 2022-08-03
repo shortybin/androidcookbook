@@ -34,7 +34,7 @@ class CategoryFragment : Fragment(R.layout.category_fragment) {
         }
 
         categoryViewModel.categoryList.observe(viewLifecycleOwner) {
-            categoryAdapter.data.addAll(it)
+            categoryAdapter.setList(it)
         }
 
         categoryViewModel.getCategory()

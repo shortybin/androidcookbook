@@ -12,6 +12,8 @@ import com.wuhuabin.cookbook.R
 import com.wuhuabin.cookbook.adapter.HomeListAdapter
 import com.wuhuabin.cookbook.databinding.HomeFragmentBinding
 import com.wuhuabin.common.dp2px
+import com.wuhuabin.cookbook.utils.ToastUtils
+import com.wuhuabin.cookbook.utils.UserInfoUtils
 import com.wuhuabin.cookbook.viewmodel.HomeViewModel
 
 class HomeFragment : Fragment(R.layout.home_fragment) {
@@ -25,19 +27,22 @@ class HomeFragment : Fragment(R.layout.home_fragment) {
         binding.recyclerView.adapter = homeListAdapter
         binding.recyclerView.addItemDecoration(GridSpacingItemDecoration(2, 10f.dp2px(), false))
 
-        val list = mutableListOf<String>()
-        for (i in 1..100) {
-            list.add(i.toString())
-        }
-
-        homeListAdapter.data.addAll(list)
-
         binding.searchLayout.setOnClickListener {
             startActivity(Intent(context, SearchActivity::class.java))
         }
 
         binding.homeAddMenu.setOnClickListener {
-            startActivity(Intent(context, AddCookbookActivity::class.java))
+            if (UserInfoUtils.isLogin()) {
+                startActivity(Intent(context, AddCookbookActivity::class.java))
+            } else {
+                ToastUtils.showCenter("请先登录")
+            }
         }
+
+        homeViewModel.homeDishList.observe(viewLifecycleOwner) {
+            homeListAdapter.setList(it)
+        }
+
+        homeViewModel.homeList(1)
     }
 }

@@ -27,11 +27,6 @@ class MyReleaseActivity : BaseActivity() {
         binding.recyclerView.addItemDecoration(GridSpacingItemDecoration(2, 10f.dp2px(), false))
         binding.recyclerView.adapter = homeListAdapter
 
-        val list = mutableListOf<String>()
-        for (i in 1..100) {
-            list.add(i.toString())
-        }
 
-        homeListAdapter.data.addAll(list)
     }
 }

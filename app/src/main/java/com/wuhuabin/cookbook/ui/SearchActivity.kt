@@ -27,14 +27,7 @@ class SearchActivity : BaseActivity() {
         binding.recyclerView.layoutManager = GridLayoutManager(this, 2)
         binding.recyclerView.adapter = homeListAdapter
         binding.recyclerView.addItemDecoration(GridSpacingItemDecoration(2, 10f.dp2px(), false))
-
-        val list = mutableListOf<String>()
-        for (i in 1..100) {
-            list.add(i.toString())
-        }
-
-        homeListAdapter.data.addAll(list)
-
+        
         binding.searchEdit.setOnEditorActionListener { _, actionId, _ ->
             if (actionId == EditorInfo.IME_ACTION_SEARCH || actionId == EditorInfo.IME_ACTION_UNSPECIFIED) {
                 searchViewModel.search(binding.searchEdit.text.toString())

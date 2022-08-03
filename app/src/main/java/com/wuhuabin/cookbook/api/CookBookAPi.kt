@@ -1,8 +1,6 @@
 package com.wuhuabin.cookbook.api
 
-import com.wuhuabin.cookbook.bean.CategoryBean
-import com.wuhuabin.cookbook.bean.UploadImageBean
-import com.wuhuabin.cookbook.bean.UserBean
+import com.wuhuabin.cookbook.bean.*
 import com.wuhuabin.net.ApiResponse
 import com.wuhuabin.net.ApiResult
 import com.wuhuabin.net.HttpClient
@@ -56,6 +54,48 @@ interface CookBookAPi {
      */
     @GET("/category/getCategoryList")
     suspend fun getCategory(): ApiResult<ApiResponse<List<CategoryBean>>>
+
+    /**
+     * 添加菜谱
+     */
+    @FormUrlEncoded
+    @POST("/dish/saveOrUpdateDish")
+    suspend fun addDish(
+        @Field("dishJson") dishJson: String,
+        @Field("dishIngredientJson") dishIngredientJson: String,
+        @Field("dishStepJson") dishStepJson: String
+    ): ApiResult<ApiResponse<String>>
+
+    /**
+     * 获取首页菜谱列表
+     */
+    @FormUrlEncoded
+    @POST("/dish/randomGetDishList")
+    suspend fun homeDishList(
+        @Field("pageNum") pageNum: Int,
+        @Field("pageSize") pageSize: Int
+    ): ApiResult<ApiResponse<List<DishDetailsBean>>>
+
+
+    /**
+     * 获取分类的菜谱
+     */
+    @FormUrlEncoded
+    @POST("/dish/getDishList")
+    suspend fun getCategoryDishList(
+        @Field("categoryId") categoryId: Int,
+        @Field("pageNum") pageNum: Int,
+        @Field("pageSize") pageSize: Int
+    ): ApiResult<ApiResponse<List<DishDetailsBean>>>
+
+    /**
+     *获取菜谱详情
+     */
+    @FormUrlEncoded
+    @POST("/dish/getDishDetail")
+    suspend fun getDishDetails(
+        @Field("dishId") dishId: Int,
+    ): ApiResult<ApiResponse<DishDetailsBean>>
 
     /**
      * 上传图片
