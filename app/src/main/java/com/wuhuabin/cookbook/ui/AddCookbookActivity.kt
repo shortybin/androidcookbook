@@ -94,7 +94,8 @@ class AddCookbookActivity : BaseActivity() {
                 binding.cookbookName.text.toString(),
                 it,
                 binding.cookbookInfo.text.toString(),
-                UserInfoUtils.getUser()!!.userid
+                UserInfoUtils.getUser()!!.userid,
+                "1"
             )
             addCookbookViewModel.addDish(
                 GsonUtils.toJson(dishUploadBean),

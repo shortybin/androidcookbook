@@ -84,6 +84,8 @@ interface CookBookAPi {
     @POST("/dish/getDishList")
     suspend fun getCategoryDishList(
         @Field("categoryId") categoryId: Int,
+        @Field("examineStatus") examineStatus: Int,
+        @Field("content") content: String,
         @Field("pageNum") pageNum: Int,
         @Field("pageSize") pageSize: Int
     ): ApiResult<ApiResponse<List<DishDetailsBean>>>

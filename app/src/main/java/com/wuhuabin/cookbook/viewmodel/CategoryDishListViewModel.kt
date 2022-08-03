@@ -14,7 +14,8 @@ class CategoryDishListViewModel : BaseViewModel() {
 
     fun getCategoryDishList(categoryId: Int, pageNum: Int) {
         viewModelScope.launch {
-            when (val result = CookBookAPi.create().getCategoryDishList(categoryId, pageNum, 20)) {
+            when (val result =
+                CookBookAPi.create().getCategoryDishList(categoryId, 2, "", pageNum, 20)) {
                 is ApiResult.Success<ApiResponse<List<DishDetailsBean>>> -> {
                     dishList.value = result.bean.data
                 }

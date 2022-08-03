@@ -27,14 +27,18 @@ class SearchActivity : BaseActivity() {
         binding.recyclerView.layoutManager = GridLayoutManager(this, 2)
         binding.recyclerView.adapter = homeListAdapter
         binding.recyclerView.addItemDecoration(GridSpacingItemDecoration(2, 10f.dp2px(), false))
-        
+
         binding.searchEdit.setOnEditorActionListener { _, actionId, _ ->
             if (actionId == EditorInfo.IME_ACTION_SEARCH || actionId == EditorInfo.IME_ACTION_UNSPECIFIED) {
-                searchViewModel.search(binding.searchEdit.text.toString())
+                searchViewModel.search(binding.searchEdit.text.toString(), 1)
                 true
             } else {
                 false
             }
+        }
+
+        searchViewModel.dishList.observe(this) {
+            homeListAdapter.setList(it)
         }
     }
 }

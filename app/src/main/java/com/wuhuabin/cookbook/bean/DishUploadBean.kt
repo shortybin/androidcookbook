@@ -5,4 +5,5 @@ data class DishUploadBean(
     val image: String,
     val detail: String,
     val create_id: Int,
+    val categoryIds: String
 )
