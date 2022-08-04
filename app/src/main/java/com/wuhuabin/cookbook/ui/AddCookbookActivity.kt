@@ -4,6 +4,7 @@ import android.net.Uri
 import android.os.Bundle
 import android.os.ParcelFileDescriptor
 import androidx.activity.viewModels
+import androidx.recyclerview.widget.GridLayoutManager
 import com.bumptech.glide.Glide
 import com.dylanc.viewbinding.binding
 import com.luck.picture.lib.basic.PictureSelector
@@ -12,8 +13,11 @@ import com.luck.picture.lib.config.SelectModeConfig
 import com.luck.picture.lib.entity.LocalMedia
 import com.luck.picture.lib.interfaces.OnResultCallbackListener
 import com.luck.picture.lib.language.LanguageConfig
+import com.wuhuabin.common.GridSpacingItemDecoration
 import com.wuhuabin.common.base.BaseActivity
+import com.wuhuabin.common.dp2px
 import com.wuhuabin.common.utils.GsonUtils
+import com.wuhuabin.cookbook.adapter.CategorySelectAdapter
 import com.wuhuabin.cookbook.bean.DishUploadBean
 import com.wuhuabin.cookbook.bean.DishIngredientBean
 import com.wuhuabin.cookbook.bean.DishStepBean
@@ -30,6 +34,7 @@ import java.io.FileInputStream
 class AddCookbookActivity : BaseActivity() {
     private val binding: ActivityAddCookbookBinding by binding()
     private val addCookbookViewModel: AddCookbookViewModel by viewModels()
+    private val categorySelectAdapter = CategorySelectAdapter()
     private val image = mutableListOf<LocalMedia>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -39,6 +44,16 @@ class AddCookbookActivity : BaseActivity() {
         binding.titleView.setLeftOnClickListener {
             finish()
         }
+
+        binding.categoryRecyclerView.layoutManager = GridLayoutManager(this, 3)
+        binding.categoryRecyclerView.addItemDecoration(
+            GridSpacingItemDecoration(
+                4,
+                10f.dp2px(),
+                false
+            )
+        )
+        binding.categoryRecyclerView.adapter = categorySelectAdapter
 
         binding.addMaterial.setOnClickListener {
             binding.materialLayout.addView(MaterialItemView(this, null))
@@ -95,7 +110,7 @@ class AddCookbookActivity : BaseActivity() {
                 it,
                 binding.cookbookInfo.text.toString(),
                 UserInfoUtils.getUser()!!.userid,
-                "1"
+                categorySelectAdapter.getSelectString()
             )
             addCookbookViewModel.addDish(
                 GsonUtils.toJson(dishUploadBean),
@@ -105,12 +120,15 @@ class AddCookbookActivity : BaseActivity() {
         }
 
         addCookbookViewModel.addDishSuccess.observe(this) {
-
+            ToastUtils.showCenter(it)
+            finish()
         }
 
         addCookbookViewModel.categoryList.observe(this) {
-
+            categorySelectAdapter.setList(it)
         }
+
+        addCookbookViewModel.getCategory()
     }
 
     private fun getIngredient(): List<DishIngredientBean> {
@@ -146,16 +164,21 @@ class AddCookbookActivity : BaseActivity() {
         if (image.isNotEmpty()) {
             if (binding.cookbookName.text.isNotEmpty()) {
                 if (binding.cookbookInfo.text.isNotEmpty()) {
-                    return if (getIngredient().isNotEmpty()) {
-                        if (getStep().isNotEmpty()) {
-                            true
+                    if (getIngredient().isNotEmpty()) {
+                        return if (getStep().isNotEmpty()) {
+                            if (categorySelectAdapter.isSelect()) {
+                                true
+                            } else {
+                                ToastUtils.showCenter("请选择菜谱分类")
+                                false
+                            }
                         } else {
                             ToastUtils.showCenter("请输入菜谱步骤")
                             false
                         }
                     } else {
                         ToastUtils.showCenter("请输入菜谱用料")
-                        false
+                        return false
                     }
                 } else {
                     ToastUtils.showCenter("请输入这道美食背后的故事")

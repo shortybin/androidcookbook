@@ -5,13 +5,17 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_gravity="center"
-    android:background="@drawable/category_normal_bg">
+    android:background="@drawable/category_normal_bg"
+    android:minWidth="80dp">
 
     <TextView
         android:id="@+id/category_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:padding="10dp"
+        android:paddingLeft="10dp"
+        android:paddingTop="8dp"
+        android:paddingRight="10dp"
+        android:paddingBottom="8dp"
         android:text="123"
         android:textColor="@color/black"
         android:textSize="14sp"

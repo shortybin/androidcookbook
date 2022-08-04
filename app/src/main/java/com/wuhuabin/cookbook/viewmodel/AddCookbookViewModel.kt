@@ -4,6 +4,7 @@ import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.wuhuabin.common.base.BaseViewModel
+import com.wuhuabin.common.bean.LoadingState
 import com.wuhuabin.cookbook.api.CookBookAPi
 import com.wuhuabin.cookbook.bean.CategoryBean
 import com.wuhuabin.cookbook.bean.UploadImageBean
@@ -29,6 +30,7 @@ class AddCookbookViewModel : BaseViewModel() {
     val categoryList = MutableLiveData<List<CategoryBean>>()
 
     fun uploadImage(inputStream: InputStream) {
+        loadingState.value = LoadingState(true, "添加菜谱中...")
         val builder = MultipartBody.Builder()
         val requestBody: RequestBody =
             RequestBody.create(MediaType.parse("image/png"), inputStream.readBytes())
@@ -42,6 +44,7 @@ class AddCookbookViewModel : BaseViewModel() {
                     uploadImageSuccess.value = result.bean.data
                 }
                 is ApiResult.Failure -> {
+                    loadingState.value = LoadingState(false)
                     toastMessage.value = result.errorMsg
                 }
             }
@@ -53,9 +56,11 @@ class AddCookbookViewModel : BaseViewModel() {
             when (val result =
                 CookBookAPi.create().addDish(dishJson, dishIngredientJson, dishStepJson)) {
                 is ApiResult.Success<ApiResponse<String>> -> {
+                    loadingState.value = LoadingState(false)
                     addDishSuccess.value = result.bean.data
                 }
                 is ApiResult.Failure -> {
+                    loadingState.value = LoadingState(false)
                     toastMessage.value = result.errorMsg
                 }
             }
@@ -63,12 +68,15 @@ class AddCookbookViewModel : BaseViewModel() {
     }
 
     fun getCategory() {
+        loadingState.value = LoadingState(true, "获取菜谱分类...")
         viewModelScope.launch {
             when (val result = CookBookAPi.create().getCategory()) {
                 is ApiResult.Success<ApiResponse<List<CategoryBean>>> -> {
+                    loadingState.value = LoadingState(false)
                     categoryList.value = result.bean.data
                 }
                 is ApiResult.Failure -> {
+                    loadingState.value = LoadingState(false)
                     toastMessage.value = result.errorMsg
                 }
             }
