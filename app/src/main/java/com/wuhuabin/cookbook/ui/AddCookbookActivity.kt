@@ -107,6 +107,10 @@ class AddCookbookActivity : BaseActivity() {
         addCookbookViewModel.addDishSuccess.observe(this) {
 
         }
+
+        addCookbookViewModel.categoryList.observe(this) {
+
+        }
     }
 
     private fun getIngredient(): List<DishIngredientBean> {

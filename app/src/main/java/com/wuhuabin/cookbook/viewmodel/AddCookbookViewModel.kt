@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.wuhuabin.common.base.BaseViewModel
 import com.wuhuabin.cookbook.api.CookBookAPi
+import com.wuhuabin.cookbook.bean.CategoryBean
 import com.wuhuabin.cookbook.bean.UploadImageBean
 import com.wuhuabin.cookbook.bean.UserBean
 import com.wuhuabin.net.ApiResponse
@@ -25,7 +26,7 @@ import java.io.InputStream
 class AddCookbookViewModel : BaseViewModel() {
     val uploadImageSuccess = MutableLiveData<String>()
     val addDishSuccess = MutableLiveData<String>()
-
+    val categoryList = MutableLiveData<List<CategoryBean>>()
 
     fun uploadImage(inputStream: InputStream) {
         val builder = MultipartBody.Builder()
@@ -53,6 +54,19 @@ class AddCookbookViewModel : BaseViewModel() {
                 CookBookAPi.create().addDish(dishJson, dishIngredientJson, dishStepJson)) {
                 is ApiResult.Success<ApiResponse<String>> -> {
                     addDishSuccess.value = result.bean.data
+                }
+                is ApiResult.Failure -> {
+                    toastMessage.value = result.errorMsg
+                }
+            }
+        }
+    }
+
+    fun getCategory() {
+        viewModelScope.launch {
+            when (val result = CookBookAPi.create().getCategory()) {
+                is ApiResult.Success<ApiResponse<List<CategoryBean>>> -> {
+                    categoryList.value = result.bean.data
                 }
                 is ApiResult.Failure -> {
                     toastMessage.value = result.errorMsg
