@@ -20,6 +20,7 @@ class MineFragment : Fragment(R.layout.mine_fragment) {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.infoItem.setItemText("个人信息")
+        binding.auditItem.setItemText("待审核的菜谱")
         binding.releaseItem.setItemText("我发布的菜谱")
         binding.changePasswordItem.setItemText("修改密码")
         binding.connectItem.setItemText("联系我们")
@@ -73,9 +74,18 @@ class MineFragment : Fragment(R.layout.mine_fragment) {
                 UserInfoUtils.logout()
                 startActivity(Intent(context, LoginActivity::class.java))
             }
+            if (UserInfoUtils.getUser()?.role == 0) {
+                binding.auditItem.visibility = View.VISIBLE
+                binding.auditItem.setOnClickListener {
+                    startActivity(Intent(context, AuditDishActivity::class.java))
+                }
+            } else {
+                binding.auditItem.visibility = View.GONE
+            }
         } else {
             binding.mineName.text = "登录/注册"
             binding.logoutText.visibility = View.GONE
+            binding.auditItem.visibility = View.GONE
         }
     }
 }

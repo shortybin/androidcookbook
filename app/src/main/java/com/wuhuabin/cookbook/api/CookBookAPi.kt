@@ -100,6 +100,16 @@ interface CookBookAPi {
     ): ApiResult<ApiResponse<DishDetailsBean>>
 
     /**
+     *修改菜谱审核状态
+     */
+    @FormUrlEncoded
+    @POST("/dish/updateExamineStatus")
+    suspend fun setDishStatus(
+        @Field("dishId") dishId: Int,
+        @Field("examineStatus") examineStatus: Int
+    ): ApiResult<ApiResponse<String>>
+
+    /**
      * 上传图片
      */
     @POST("/dish/uploadFile")
