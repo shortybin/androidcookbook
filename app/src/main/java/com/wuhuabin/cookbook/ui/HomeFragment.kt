@@ -73,6 +73,16 @@ class HomeFragment : Fragment(R.layout.home_fragment) {
             }
         }
 
+        homeViewModel.listSuccess.observe(viewLifecycleOwner) {
+            if (!it) {
+                if (page == 1) {
+                    binding.smartRefreshLayout.finishRefresh()
+                } else {
+                    binding.smartRefreshLayout.finishLoadMore()
+                }
+            }
+        }
+
         binding.smartRefreshLayout.autoRefresh()
     }
 }
