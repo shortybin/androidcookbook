@@ -45,8 +45,18 @@ interface CookBookAPi {
     @POST("/user/changePassword")
     suspend fun changePassword(
         @Field("userId") userId: Int,
-        @Field("password") userName: String,
-        @Field("confirmPassword") password: String
+        @Field("password") password: String,
+        @Field("confirmPassword") confirmPassword: String
+    ): ApiResult<ApiResponse<String>>
+
+    /**
+     * 修改用户名
+     */
+    @FormUrlEncoded
+    @POST("/user/changeUserName")
+    suspend fun changeUserName(
+        @Field("userId") userId: Int,
+        @Field("userName") userName: String,
     ): ApiResult<ApiResponse<String>>
 
     /**

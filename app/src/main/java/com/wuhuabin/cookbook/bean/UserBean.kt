@@ -6,6 +6,6 @@ package com.wuhuabin.cookbook.bean
  */
 data class UserBean(
     val userid: Int,
-    val username: String,
+    var username: String,
     val role: Int
 )

@@ -48,6 +48,6 @@ class MainApplication : Application() {
         application = this
         HttpClient.instance
             .addInterceptor(BusinessErrorInterceptor())
-            .build("http://192.168.2.141:8080")
+            .build("http://192.168.0.102:8080")
     }
 }

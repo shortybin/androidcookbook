@@ -21,7 +21,6 @@ class MineFragment : Fragment(R.layout.mine_fragment) {
         super.onViewCreated(view, savedInstanceState)
         binding.infoItem.setItemText("个人信息")
         binding.auditItem.setItemText("待审核的菜谱")
-        binding.releaseItem.setItemText("我发布的菜谱")
         binding.changePasswordItem.setItemText("修改密码")
         binding.connectItem.setItemText("联系我们")
         binding.aboutItem.setItemText("关于我们")

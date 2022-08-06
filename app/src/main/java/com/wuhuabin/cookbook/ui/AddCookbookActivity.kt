@@ -23,6 +23,7 @@ import com.wuhuabin.cookbook.bean.DishIngredientBean
 import com.wuhuabin.cookbook.bean.DishStepBean
 import com.wuhuabin.cookbook.databinding.ActivityAddCookbookBinding
 import com.wuhuabin.cookbook.utils.GlideEngine
+import com.wuhuabin.cookbook.utils.ImageLoader
 import com.wuhuabin.cookbook.utils.ToastUtils
 import com.wuhuabin.cookbook.utils.UserInfoUtils
 import com.wuhuabin.cookbook.viewmodel.AddCookbookViewModel
@@ -74,8 +75,9 @@ class AddCookbookActivity : BaseActivity() {
                 .forResult(object : OnResultCallbackListener<LocalMedia> {
                     override fun onResult(result: ArrayList<LocalMedia>) {
                         image.clear()
-                        Glide.with(this@AddCookbookActivity).load(result[0].realPath)
-                            .into(binding.cookbookImage)
+                        Glide.with(this@AddCookbookActivity).load(result[0].realPath).apply(
+                            ImageLoader.defaultOption()
+                        ).into(binding.cookbookImage)
                         image.addAll(result)
                     }
 

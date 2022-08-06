@@ -13,9 +13,13 @@ import com.wuhuabin.common.dp2px
 import com.wuhuabin.cookbook.Constant
 import com.wuhuabin.cookbook.adapter.AuditDishAdapter
 import com.wuhuabin.cookbook.adapter.HomeListAdapter
+import com.wuhuabin.cookbook.bean.DishStatusChangeEvent
 import com.wuhuabin.cookbook.databinding.ActivityAuditDishBinding
 import com.wuhuabin.cookbook.utils.ToastUtils
 import com.wuhuabin.cookbook.viewmodel.AuditDishViewModel
+import org.greenrobot.eventbus.EventBus
+import org.greenrobot.eventbus.Subscribe
+import org.greenrobot.eventbus.ThreadMode
 
 class AuditDishActivity : BaseActivity() {
     private val binding: ActivityAuditDishBinding by binding()
@@ -26,6 +30,7 @@ class AuditDishActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
+        EventBus.getDefault().register(this)
         binding.titleView.setTitleText("待审核的菜谱")
         binding.titleView.setLeftOnClickListener {
             finish()
@@ -91,5 +96,15 @@ class AuditDishActivity : BaseActivity() {
         }
 
         binding.smartRefreshLayout.autoRefresh()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        EventBus.getDefault().unregister(this)
+    }
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    fun dishStatusChange(dishStatusChangeEvent: DishStatusChangeEvent) {
+        auditDishAdapter.removeDishId(dishStatusChangeEvent.dishId)
     }
 }
