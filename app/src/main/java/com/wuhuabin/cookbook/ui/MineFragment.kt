@@ -25,6 +25,11 @@ class MineFragment : Fragment(R.layout.mine_fragment) {
         binding.connectItem.setItemText("联系我们")
         binding.aboutItem.setItemText("关于我们")
 
+        binding.mineHeaderImage.setOnClickListener {
+            if (!UserInfoUtils.isLogin()) {
+                startActivity(Intent(context, LoginActivity::class.java))
+            }
+        }
         binding.mineName.setOnClickListener {
             if (!UserInfoUtils.isLogin()) {
                 startActivity(Intent(context, LoginActivity::class.java))

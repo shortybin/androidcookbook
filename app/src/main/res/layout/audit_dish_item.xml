@@ -8,7 +8,7 @@
     android:paddingTop="10dp"
     android:paddingRight="10dp">
 
-    <ImageView
+    <com.gcssloop.widget.RCImageView
         android:id="@+id/dish_image"
         android:layout_width="100dp"
         android:layout_height="0dp"
@@ -16,7 +16,8 @@
         android:src="@drawable/ic_default"
         app:layout_constraintDimensionRatio="3:2"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:round_corner="10dp" />
 
     <TextView
         android:id="@+id/dish_title"

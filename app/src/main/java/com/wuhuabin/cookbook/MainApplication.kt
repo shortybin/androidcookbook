@@ -24,8 +24,7 @@ class MainApplication : Application() {
             //设置全局默认配置（优先级最低，会被其他设置覆盖）
             SmartRefreshLayout.setDefaultRefreshInitializer { context, layout ->
                 //开始设置全局的基本参数（可以被下面的DefaultRefreshHeaderCreator覆盖）
-                layout.setReboundDuration(1000)
-                layout.setFooterHeight(100f)
+                layout.setReboundDuration(500)
                 layout.setDisableContentWhenLoading(false)
                 layout.setPrimaryColorsId(R.color.white, R.color.red_500)
             }

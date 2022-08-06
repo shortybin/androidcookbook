@@ -4,21 +4,21 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-    <ImageView
+    <com.gcssloop.widget.RCImageView
         android:id="@+id/cookbook_image"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:scaleType="centerCrop"
         android:src="@drawable/ic_default"
         app:layout_constraintDimensionRatio="3:2"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:round_corner="10dp" />
 
     <TextView
         android:id="@+id/cookbook_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
-        android:layout_marginBottom="5dp"
         android:textColor="@color/black"
         android:textSize="14sp"
         android:textStyle="bold"
