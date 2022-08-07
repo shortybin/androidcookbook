@@ -5,6 +5,7 @@ import com.scwang.smart.refresh.footer.ClassicsFooter
 import com.scwang.smart.refresh.header.ClassicsHeader
 import com.scwang.smart.refresh.layout.SmartRefreshLayout
 import com.wuhuabin.cookbook.api.BusinessErrorInterceptor
+import com.wuhuabin.cookbook.api.CookBookAPi
 import com.wuhuabin.net.HttpClient
 
 
@@ -47,6 +48,6 @@ class MainApplication : Application() {
         application = this
         HttpClient.instance
             .addInterceptor(BusinessErrorInterceptor())
-            .build("http://192.168.0.102:8080")
+            .build(CookBookAPi.APIURL)
     }
 }

@@ -11,13 +11,15 @@ import com.wuhuabin.cookbook.bean.CategoryBean
 import com.wuhuabin.cookbook.databinding.CategoryItemBinding
 import com.wuhuabin.cookbook.ui.CategoryDishListActivity
 import com.wuhuabin.cookbook.utils.ImageLoader
+import com.wuhuabin.cookbook.utils.addHostLoad
 
 class CategoryAdapter : BaseQuickAdapter<CategoryBean, BaseViewHolder>(R.layout.category_item) {
 
     override fun convert(holder: BaseViewHolder, categoryBean: CategoryBean) {
         val binding = holder.getBinding(CategoryItemBinding::bind)
         binding.categoryText.text = categoryBean.name
-        Glide.with(holder.itemView).load(categoryBean.image).apply(ImageLoader.defaultOption())
+        Glide.with(holder.itemView).addHostLoad(categoryBean.image)
+            .apply(ImageLoader.defaultOption())
             .into(binding.categoryImage)
 
         holder.itemView.setOnClickListener {

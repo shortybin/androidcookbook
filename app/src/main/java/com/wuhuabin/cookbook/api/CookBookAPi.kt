@@ -13,6 +13,7 @@ import retrofit2.http.*
  */
 interface CookBookAPi {
     companion object {
+        const val APIURL = "http://192.168.0.102:8080"
         fun create(): CookBookAPi {
             return HttpClient.instance.retrofit.create(CookBookAPi::class.java)
         }

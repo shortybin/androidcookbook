@@ -11,6 +11,7 @@ import com.wuhuabin.cookbook.bean.DishStatusChangeEvent
 import com.wuhuabin.cookbook.databinding.ActivityDetailsBinding
 import com.wuhuabin.cookbook.utils.ImageLoader
 import com.wuhuabin.cookbook.utils.ToastUtils
+import com.wuhuabin.cookbook.utils.addHostLoad
 import com.wuhuabin.cookbook.viewmodel.DetailsViewModel
 import com.wuhuabin.cookbook.views.MaterialShowView
 import com.wuhuabin.cookbook.views.PracticeShowView
@@ -30,7 +31,7 @@ class DetailsActivity : BaseActivity() {
         }
         detailsViewModel.dishDetails.observe(this) {
             binding.titleView.setTitleText(it.name)
-            Glide.with(this).load(it.image).apply(ImageLoader.defaultOption())
+            Glide.with(this).addHostLoad(it.image).apply(ImageLoader.defaultOption())
                 .into(binding.cookbookImage)
             binding.cookbookName.text = it.name
             binding.cookbookInfo.text = it.detail

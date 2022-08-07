@@ -49,7 +49,7 @@ class AddCookbookActivity : BaseActivity() {
         binding.categoryRecyclerView.layoutManager = GridLayoutManager(this, 3)
         binding.categoryRecyclerView.addItemDecoration(
             GridSpacingItemDecoration(
-                4,
+                3,
                 10f.dp2px(),
                 false
             )
@@ -75,9 +75,8 @@ class AddCookbookActivity : BaseActivity() {
                 .forResult(object : OnResultCallbackListener<LocalMedia> {
                     override fun onResult(result: ArrayList<LocalMedia>) {
                         image.clear()
-                        Glide.with(this@AddCookbookActivity).load(result[0].realPath).apply(
-                            ImageLoader.defaultOption()
-                        ).into(binding.cookbookImage)
+                        Glide.with(this@AddCookbookActivity).load(result[0].realPath)
+                            .into(binding.cookbookImage)
                         image.addAll(result)
                     }
 

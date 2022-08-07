@@ -39,10 +39,12 @@ class CategorySelectAdapter :
     fun getSelectString(): String {
         val stringBuilder = StringBuilder()
         for (item in data) {
-            if (stringBuilder.isEmpty()) {
-                stringBuilder.append(item.id)
-            } else {
-                stringBuilder.append(",${item.id}")
+            if (item.select) {
+                if (stringBuilder.isEmpty()) {
+                    stringBuilder.append(item.id)
+                } else {
+                    stringBuilder.append(",${item.id}")
+                }
             }
         }
         return stringBuilder.toString()

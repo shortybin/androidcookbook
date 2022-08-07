@@ -11,13 +11,14 @@ import com.wuhuabin.cookbook.bean.DishDetailsBean
 import com.wuhuabin.cookbook.databinding.HomeListItemBinding
 import com.wuhuabin.cookbook.ui.DetailsActivity
 import com.wuhuabin.cookbook.utils.ImageLoader
+import com.wuhuabin.cookbook.utils.addHostLoad
 
 class HomeListAdapter : BaseQuickAdapter<DishDetailsBean, BaseViewHolder>(R.layout.home_list_item) {
 
     override fun convert(holder: BaseViewHolder, detailsBean: DishDetailsBean) {
         val binding = holder.getBinding(HomeListItemBinding::bind)
         binding.cookbookName.text = detailsBean.name
-        Glide.with(holder.itemView).load(detailsBean.image).apply(ImageLoader.defaultOption())
+        Glide.with(holder.itemView).addHostLoad(detailsBean.image).apply(ImageLoader.defaultOption())
             .into(binding.cookbookImage)
 
         holder.itemView.setOnClickListener {

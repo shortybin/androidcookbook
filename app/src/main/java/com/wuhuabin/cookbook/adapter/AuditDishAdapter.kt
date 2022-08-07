@@ -12,6 +12,7 @@ import com.wuhuabin.cookbook.databinding.AuditDishItemBinding
 import com.wuhuabin.cookbook.databinding.CategoryItemBinding
 import com.wuhuabin.cookbook.ui.DetailsActivity
 import com.wuhuabin.cookbook.utils.ImageLoader
+import com.wuhuabin.cookbook.utils.addHostLoad
 import com.wuhuabin.cookbook.viewmodel.AuditDishViewModel
 
 class AuditDishAdapter(private val auditDishViewModel: AuditDishViewModel) :
@@ -30,7 +31,7 @@ class AuditDishAdapter(private val auditDishViewModel: AuditDishViewModel) :
     override fun convert(holder: BaseViewHolder, item: DishDetailsBean) {
         val binding = holder.getBinding(AuditDishItemBinding::bind)
 
-        Glide.with(context).load(item.image).apply(ImageLoader.defaultOption())
+        Glide.with(context).addHostLoad(item.image).apply(ImageLoader.defaultOption())
             .into(binding.dishImage)
         binding.dishTitle.text = item.name
         binding.dishInfo.text = item.detail
